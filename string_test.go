@@ -88,7 +88,7 @@ func TestString_UnmarshalJSON_Overwritten(t *testing.T) {
 		WithValue:     NewString("seed_a"),
 		WithZeroValue: NewString("seed_b"),
 		WithNoValue:   NewString("seed_c"),
-		Unused:        NewString("seed_d"),
+		Unused:        NewString("prev_value"),
 	}
 
 	var jsonString = `{"WithValue":"foo","WithZeroValue":"","WithNoValue":null}`
@@ -108,6 +108,6 @@ func TestString_UnmarshalJSON_Overwritten(t *testing.T) {
 	assert.Nil(t, val.WithNoValue.value)
 
 	assert.True(t, val.Unused.IsPresent())
-	assert.Equal(t, val.Unused.Value(), "seed_d")
+	assert.Equal(t, val.Unused.Value(), "prev_value")
 	assert.NotNil(t, val.Unused.value)
 }
